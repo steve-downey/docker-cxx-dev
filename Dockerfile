@@ -14,9 +14,9 @@ RUN apt-get update -qq && export DEBIAN_FRONTEND=noninteractive && \
         python3 python3-pip
 
 # User-settable versions:
-# This Dockerfile should support gcc-[7, 8, 9, 10, 11] and clang-[10, 11, 12, 13]
+# This Dockerfile should support gcc-[9, 10, 11, 12, 13] and clang-[13, 14, 15, 16, 17]
 # Earlier versions of clang will require significant modifications to the IWYU section
-ARG GCC_VER="12"
+ARG GCC_VER="13"
 # Add gcc-${GCC_VER}
 RUN apt-get update -qq && export DEBIAN_FRONTEND=noninteractive && \
     apt-get install -y --no-install-recommends \
@@ -28,7 +28,7 @@ RUN update-alternatives --install /usr/bin/g++ g++ $(which g++-${GCC_VER}) 100
 RUN update-alternatives --install /usr/bin/cc cc $(which gcc-${GCC_VER}) 100
 RUN update-alternatives --install /usr/bin/c++ c++ $(which g++-${GCC_VER}) 100
 
-ARG LLVM_VER="14"
+ARG LLVM_VER="16"
 # Add clang-${LLVM_VER}
 ARG LLVM_URL="http://apt.llvm.org/${VARIANT}/"
 ARG LLVM_PKG="llvm-toolchain-${VARIANT}-${LLVM_VER}"
